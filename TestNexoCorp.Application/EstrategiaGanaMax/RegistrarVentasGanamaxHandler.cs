@@ -31,7 +31,9 @@ namespace TestNexoCorp.Application.EstrategiaGanaMax
             }
 
             //regla de negocio 4
-            if (expProducto.ErpProductos.Stock <= request.Cantidad) throw new Exception("No hay stock suficiente");
+            if (expProducto.ErpProductos.Stock - request.Cantidad <= 10)
+                throw new Exception("No hay stock suficiente: debe quedar mínimo 11 unidades después de la venta");
+
 
             var total = (expProducto.Precio * request.Cantidad) - descuento;
 

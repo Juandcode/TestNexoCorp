@@ -29,10 +29,10 @@ string? respuesta = Console.ReadLine();
 if (!string.IsNullOrEmpty(respuesta) && respuesta == "si") negocioBase = true;
 
 ErpProductos erpProducto;
-//Pregunta 1
+//Pregunta 1: Registro de nuevo producto ERP
 if (negocioBase)
 {
-//SISTEMA POS EXPRESS
+    //SISTEMA POS EXPRESS: precio = costo / 2, stock recibido tal como viene
     erpProducto = await mediator.Send(
         new RegistrarNuevoErpProductoCommand
         {
@@ -43,7 +43,7 @@ if (negocioBase)
 }
 else
 {
-    //ESTRATEGIA GANAMAX
+    //ESTRATEGIA GANAMAX: precio = costo * 0.80 (80% margen), stock fijado en 20 unidades
     erpProducto = await mediator.Send(
         new RegistrarNuevoErpProductoGanamaxCommand()
         {
@@ -56,7 +56,7 @@ else
 Console.WriteLine(
     $"ErpProducto registrado: IdProducto={erpProducto.IdProducto}, Stock={erpProducto.Stock}, Costo={erpProducto.Costo}");
 
-//Pregunta 2
+//Pregunta 2: Registro de código de barras
 var codigosBarras = await mediator.Send(
     new RegistrarCodigoBarrasCommand
     {
@@ -67,7 +67,7 @@ Console.WriteLine(
     $"Codigo Barra registrado: IdProducto={codigosBarras.IdCodigoBarra}, Unique={erpProducto.UniqueCodigo}");
 
 
-//Pregunta 3
+//Pregunta 3: Registro de categoría + vinculación de producto
 var categoriaProducto = await mediator.Send(
     new RegistrarCategoriasProductosCommand
     {
@@ -79,11 +79,27 @@ Console.WriteLine(
     $"Categoria registrada: Categoria descripcion={categoriaProducto.Categorias.Descripcion}, " +
     $"Nombre producto={categoriaProducto.ExpProductos.Nombre}, Id Producto={categoriaProducto.IdProducto}");
 
-//Pregunta 4 
-
-var venta = await mediator.Send(
-    new RegistrarVentasCommand
-    {
-        IdProducto = erpProducto.IdProducto,
-        Cantidad = 5
-    });
+//Pregunta 4: Registro de venta
+VentasExpress venta;
+if (negocioBase)
+{
+    //REGLA NEGOCIO BASE: 30% de descuento si producto tiene exactamente 1 categoría,
+    //stock mínimo verificado: stock - cantidad > 0
+    venta = await mediator.Send(
+        new RegistrarVentasCommand
+        {
+            IdProducto = erpProducto.IdProducto,
+            Cantidad = 5
+        });
+}
+else
+{
+    //ESTRATEGIA GANAMAX: 10% de descuento si producto tiene exactamente 1 categoría,
+    //regla 4: stock debe quedar > 10 después de la venta, cantidad fija 5
+    venta = await mediator.Send(
+        new RegistrarVentasGanamaxCommand
+        {
+            IdProducto = erpProducto.IdProducto,
+            Cantidad = 5
+        });
+}
