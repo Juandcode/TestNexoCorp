@@ -56,9 +56,19 @@ Cada comando encapsula los datos necesarios para su operación. A continuación,
 | `Nombre` | `string` | Ingresado por usuario | Ingresado por usuario | Nombre descriptivo del producto |
 | `Observaciones` | `string` | `string.Empty` por defecto | `string.Empty` por defecto | Comentarios adicionales |
 | `Costo` | `decimal` | Costo real del producto | Costo real del producto | Precio de adquisición del producto |
-| `Stock` | `int` | Valor ingresado (ej. 100) | Valor ingresado, pero **handler fija en 20** | Inventario inicial disponible |
+| `Stock` | `int` | Valor ingresado (ej. 100) | Valor ingresado (usuario lo define) | Inventario inicial disponible |
 
-**En el handler Ganamax:** El `Stock` enviado en el comando es recibido pero **sobrescrito a 20** unidades siempre, independientemente del valor enviado. Esto garantiza un stock de seguridad inicial bajo la estrategia Ganamax.
+#### Reglas de negocio aplicadas en ambos handlers:
+
+| Regla | Descripción | Negocio Base | Estrategia Ganamax |
+|---|---|---|---|
+| **Precio de creación** | Se calcula el precio a partir del costo | `Precio = Costo / 2` (50% margen) | `Precio = Costo × 0.80` (20% margen, precio más alto al cliente) |
+| **Fecha de vencimiento** | Producto tiene fecha de caducidad | `FechaVencimiento = Ahora + 10 meses` | `FechaVencimiento = Ahora + 10 meses` (idéntico) |
+| **Stock ERP** | Unidades de stock en el registro ERP | Valor recibido en comando | Valor recibido en comando (mismo comportamiento) |
+
+**Notas:**
+- En **ambos handlers** se crea primero el producto `ExpProductos` (con su precio y vencimiento), luego el registro `ErpProductos` (con costo, stock y fecha de registro).
+- El `Stock` enviado en el comando es utilizado tal cual en ambos casos (ya no hay hardcodeo a 20 en Ganamax).
 
 ---
 

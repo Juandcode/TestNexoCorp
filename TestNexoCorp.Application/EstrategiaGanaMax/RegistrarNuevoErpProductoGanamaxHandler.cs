@@ -32,7 +32,7 @@ namespace TestNexoCorp.Application.EstrategiaGanaMax
             {
                 IdProducto = exProducto.IdProducto,
                 Costo = costo,
-                Stock = 20,
+                Stock = request.Stock,
                 FechaRegistro = DateTime.Now,
             };
 
