@@ -36,7 +36,7 @@ if (negocioBase)
     erpProducto = await mediator.Send(
         new RegistrarNuevoErpProductoCommand
         {
-            Nombre = "Producto de prueba3",
+            Nombre = "Producto de prueba 4",
             Costo = 2,
             Stock = 100,
         });
@@ -47,7 +47,7 @@ else
     erpProducto = await mediator.Send(
         new RegistrarNuevoErpProductoGanamaxCommand()
         {
-            Nombre = "Producto de prueba3",
+            Nombre = "Producto de prueba 4",
             Costo = 2,
             Stock = 100,
         });
@@ -71,7 +71,7 @@ Console.WriteLine(
 var categoriaProducto = await mediator.Send(
     new RegistrarCategoriasProductosCommand
     {
-        DescripcionCategoria = "Categoria de prueba",
+        DescripcionCategoria = "Categoria de prueba 4",
         IdErpProducto = erpProducto.IdProducto,
     });
 
@@ -95,7 +95,7 @@ if (negocioBase)
 else
 {
     //ESTRATEGIA GANAMAX: 10% de descuento si producto tiene exactamente 1 categoría,
-    //regla 4: stock debe quedar > 10 después de la venta, cantidad fija 5
+    //regla 4: stock debe quedar > 10 después de la venta
     venta = await mediator.Send(
         new RegistrarVentasGanamaxCommand
         {

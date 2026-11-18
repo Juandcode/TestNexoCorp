@@ -5,10 +5,10 @@ using TestNexoCorp.Domain;
 namespace TestNexoCorp.Application.EstrategiaGanaMax
 {
     public class RegistrarVentasGanamaxHandler(IUnitOfWork unitOfWork)
-        : IRequestHandler<RegistrarVentasCommand, VentasExpress>
+        : IRequestHandler<RegistrarVentasGanamaxCommand, VentasExpress>
     {
         public async Task<VentasExpress> Handle(
-            RegistrarVentasCommand request,
+            RegistrarVentasGanamaxCommand request,
             CancellationToken cancellationToken)
         {
             await unitOfWork.BeginTransactionAsync();
