@@ -38,7 +38,7 @@ Durante **3 meses** (desde la fecha actual hasta 3 meses después), la aplicaci�
 | Aspecto | Negocio Base | Estrategia Ganamax |
 |---|---|---|
 | **Precio de venta** | `Precio = Costo / 2` (50% margen) | `Precio = Costo × 0.80` (20% margen, precio más alto al cliente) |
-| **Stock inicial** | Valor ingresado en el comando | **Fijado en 20 unidades** (siempre) |
+| **Stock inicial** | Valor ingresado en el comando | Valor ingresado en el comando |
 | **Descuento por categoría** | 30% si el producto tiene exactamente 1 categoría | 10% si el producto tiene exactamente 1 categoría |
 | **Regla de stock (Negocio 4)** | `stock - cantidad > 0` (solo stock suficiente) | `stock - cantidad > 10` (mínimo 11 unidades deben quedar) |
 | **Comandos usados** | `RegistrarNuevoErpProductoCommand`, `RegistrarVentasCommand` | `RegistrarNuevoErpProductoGanamaxCommand`, `RegistrarVentasGanamaxCommand` |
