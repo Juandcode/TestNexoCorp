@@ -1,0 +1,51 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Publish output
+[Oo]ut/
+publish/
+
+# Test results
+TestResults/
+[Tt]est[Aa]pp/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# User-specific files
+*.rsuser
+*.sln.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets / env
+.env
+.env.*
+*.user.secrets
