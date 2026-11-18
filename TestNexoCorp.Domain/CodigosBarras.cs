@@ -6,7 +6,6 @@ namespace TestNexoCorp.Domain
     public class CodigosBarras
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdCodigoBarra { get; set; }
         
         public Guid UniqueCodigo { get; set; } = Guid.NewGuid();

@@ -6,7 +6,6 @@ namespace TestNexoCorp.Domain
     public class ProductosCategorias
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid IdDetalle { get; set; }
 
         public DateTime FechaCreacion { get; set; } = DateTime.Now;

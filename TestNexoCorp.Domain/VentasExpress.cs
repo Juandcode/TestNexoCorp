@@ -6,7 +6,6 @@ namespace TestNexoCorp.Domain
     public class VentasExpress
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public DateTime Fecha { get; set; } = DateTime.Now;
